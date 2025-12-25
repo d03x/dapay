@@ -1,4 +1,5 @@
 import 'package:dapay/core/dialogs/info_dialog.dart';
+import 'package:dapay/core/extensions/extension.dart';
 import 'package:dapay/core/routers/router.dart';
 import 'package:dapay/core/widgets/ui/widget_ui_input.dart';
 import 'package:dapay/features/auth/presentation/view_model/auth_view_model.dart';
@@ -14,10 +15,10 @@ class AuthLoginScreen extends ConsumerWidget {
       margin: .only(bottom: 20.h),
       child: Column(
         children: [
-          Text("DAPAY APP", style: Theme.of(context).textTheme.titleMedium),
+          Text("DAPAY APP", style: context.textTheme.titleMedium),
           Text(
             "Silahkan login mengunakan akun anda",
-            style: Theme.of(context).textTheme.labelMedium,
+            style: context.textTheme.labelMedium,
           ),
         ],
       ),
@@ -96,7 +97,10 @@ class AuthLoginScreen extends ConsumerWidget {
                 child: RichText(
                   text: TextSpan(
                     text: "Developed with ❤ ",
-                    style: TextStyle(fontSize: 12.sp, color: Colors.black),
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      color: context.colors.onSurface,
+                    ),
                     children: [TextSpan(text: " By Dapay")],
                   ),
                 ),
