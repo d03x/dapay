@@ -16,7 +16,11 @@ class App extends ConsumerWidget {
         appBarElevation: 0,
       ),
       navigatorKey: navigatorKey,
-      theme: FlexThemeData.light(scheme: FlexScheme.blueM3, appBarElevation: 0),
+      theme: FlexThemeData.light(
+        scheme: FlexScheme.blueM3,
+        appBarElevation: 4,
+        appBarStyle: FlexAppBarStyle.primary,
+      ),
       debugShowCheckedModeBanner: false,
       themeMode: colorScheme.themeMode,
       initialRoute: RouteName.root,

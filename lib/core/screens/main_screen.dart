@@ -4,6 +4,7 @@ import 'package:dapay/features/auth/presentation/screens/auth_register_screen.da
 import 'package:dapay/features/home/persentation/screens/home_screen_content.dart';
 import 'package:dapay/features/home/persentation/view_model/presisten_navigation_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -22,39 +23,40 @@ class MainScreen extends ConsumerWidget {
 
   List<PersistentBottomNavBarItem> _navBarsItems(ColorScheme colors) {
     return [
-      // ITEM 1: HOME
       PersistentBottomNavBarItem(
         icon: const Icon(
-          Icons.home_rounded,
+          LucideIcons.house,
         ), // Gunakan rounded icon biar lebih modern
         title: ("Home"),
         activeColorPrimary: colors.primary,
-        inactiveColorPrimary: Colors.grey, // Warna abu saat tidak aktif
+        inactiveColorPrimary: colors.onPrimaryContainer.withValues(
+          alpha: 0.5,
+        ), // Warna abu saat tidak aktif
         activeColorSecondary:
             colors.primary, // Warna icon saat aktif (untuk style tertentu)
       ),
 
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.edit_document),
+        icon: const Icon(LucideIcons.receipt),
         title: ("Transaksi"),
         activeColorPrimary: colors.primary,
-        inactiveColorPrimary: Colors.grey,
+        inactiveColorPrimary: colors.onPrimaryContainer.withValues(alpha: 0.5),
         activeColorSecondary: colors.primary,
       ),
 
       // ITEM 3: REGISTER
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.notifications),
+        icon: const Icon(LucideIcons.bell),
         title: ("Notifikasi"),
         activeColorPrimary: colors.primary,
-        inactiveColorPrimary: Colors.grey,
+        inactiveColorPrimary: colors.onPrimaryContainer.withValues(alpha: 0.5),
         activeColorSecondary: colors.primary,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.account_circle),
+        icon: const Icon(LucideIcons.user),
         title: ("Akun"),
         activeColorPrimary: colors.primary,
-        inactiveColorPrimary: Colors.grey,
+        inactiveColorPrimary: colors.onPrimaryContainer.withValues(alpha: 0.5),
         activeColorSecondary: colors.primary,
       ),
     ];
