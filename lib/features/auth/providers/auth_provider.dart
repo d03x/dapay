@@ -21,11 +21,13 @@ class AuthState extends Equatable {
 }
 
 class AuthProvider extends AsyncNotifier<AuthState> {
+  final String _tokenKey = "token_auth";
+  final String _refreshTokenKey = "refresh_token";
   @override
   Future<AuthState> build() async {
     final storage = ref.watch(storageProvider);
-    final isAuth = await storage.get('token');
-    final refreshToken = await storage.get('token');
+    final isAuth = await storage.get(_tokenKey);
+    final refreshToken = await storage.get(_tokenKey);
     return AuthState(token: isAuth, refreshToken: refreshToken);
   }
 
@@ -33,8 +35,8 @@ class AuthProvider extends AsyncNotifier<AuthState> {
   Future<void> updateState(UserModel user) async {
     final storageService = ref.read(storageProvider);
     state = const AsyncValue.loading();
-    storageService.write('token', user.token);
-    storageService.write('refresh_token', user.refreshToken);
+    storageService.write(_tokenKey, user.token);
+    storageService.write(_refreshTokenKey, user.refreshToken);
     state = await AsyncValue.guard(() async {
       return AuthState(token: user.token, refreshToken: user.refreshToken);
     });
@@ -44,7 +46,7 @@ class AuthProvider extends AsyncNotifier<AuthState> {
   Future<void> logout() async {
     final storage = ref.watch(storageProvider);
     state = AsyncValue.loading();
-    await storage.delete('token');
+    await storage.delete(_tokenKey);
     state = await AsyncValue.guard(() async {
       return AuthState(token: null, refreshToken: null);
     });

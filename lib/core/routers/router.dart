@@ -1,7 +1,7 @@
 import 'package:dapay/core/auth_guard.dart';
+import 'package:dapay/core/screens/main_screen.dart';
 import 'package:dapay/core/widgets/widget.dart';
 import 'package:dapay/features/auth/presentation/screens/auth_register_screen.dart';
-import 'package:dapay/features/home/persentation/screens/home_persentation_ui.dart';
 import 'package:flutter/material.dart';
 
 part 'route_name.dart';
@@ -12,7 +12,7 @@ class RouterUtils {
     switch (setting.name) {
       case RouteName.root:
         return MaterialPageRoute(
-          builder: (context) => AuthGuard(child: HomePersentationUi()),
+          builder: (context) => AuthGuard(child: MainScreen()),
         );
       case RouteName.register:
         return MaterialPageRoute(builder: (context) => AuthRegisterScreen());

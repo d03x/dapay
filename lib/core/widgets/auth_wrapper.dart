@@ -10,7 +10,7 @@ class AuthWrapper extends ConsumerWidget {
         if (data == null) {
           return AuthLoginScreen();
         }
-        return HomePersentationUi();
+        return MainScreen();
       },
       error: (error, stackTrace) {
         return Text("ERROR");
