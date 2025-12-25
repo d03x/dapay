@@ -1,10 +1,10 @@
 part of "extension.dart";
 
 extension NumberExtension on num {
-  String toIDR() {
+  String toIDR({String symbol = "Rp. "}) {
     final format = NumberFormat.currency(
       locale: "id_ID",
-      symbol: "Rp. ",
+      symbol: symbol,
       decimalDigits: 0,
     );
     return format.format(this);
