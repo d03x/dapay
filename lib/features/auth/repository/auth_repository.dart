@@ -9,8 +9,8 @@ class AuthRepository {
   AuthRepository({required this.dio});
   Future<UserModel> login(String email, String password) async {
     final data = await dio.post(
-      "api.php?endpoint=auth&type=login",
-      data: FormData.fromMap({"email": email, "password": password}),
+      "/auth/login",
+      data: {"email": email, "password": password},
     );
     return UserModel.fromJson(data.data);
   }

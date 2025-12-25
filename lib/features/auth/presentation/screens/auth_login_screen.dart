@@ -35,7 +35,7 @@ class AuthLoginScreen extends ConsumerWidget {
           context,
           title: "Waduhhh!!",
           message:
-              "Ada Kesalahan pada saat request! Tenang ini bukan salah client",
+              "Ada Kesalahan pada saat request! Tenang ini bukan salah client ${next.error.toString()}",
         );
       }
     });

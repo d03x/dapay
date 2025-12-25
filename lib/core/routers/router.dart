@@ -1,6 +1,6 @@
 import 'package:dapay/core/auth_guard.dart';
 import 'package:dapay/core/screens/main_screen.dart';
-import 'package:dapay/core/widgets/widget.dart';
+import 'package:dapay/core/widgets/not_found_page.dart';
 import 'package:dapay/features/auth/presentation/screens/auth_register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class RouterUtils {
       case RouteName.register:
         return MaterialPageRoute(builder: (context) => AuthRegisterScreen());
       default:
-        return MaterialPageRoute(builder: (context) => AuthWrapper());
+        return MaterialPageRoute(builder: (context) => NotFoundPage());
     }
   }
 }

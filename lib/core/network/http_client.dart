@@ -1,12 +1,13 @@
+import 'package:dapay/core/extensions/extension.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final httpClient = Provider.autoDispose((ref) {
   final dio = Dio(
     BaseOptions(
-      baseUrl: 'http://192.168.179.92:5173/',
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
+      baseUrl: ref.config.apiUrl,
+      connectTimeout: Duration(milliseconds: ref.config.apiTimeout),
+      receiveTimeout: Duration(milliseconds: ref.config.apiTimeout),
     ),
   );
   dio.interceptors.add(

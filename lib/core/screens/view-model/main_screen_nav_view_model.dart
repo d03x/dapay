@@ -9,7 +9,7 @@ class State {
   State({required this.controller, required this.scrollController});
 }
 
-final presistentNavigationViewModel = Provider<State>((ref) {
+final mainScreenNavViewModel = Provider<State>((ref) {
   final PersistentTabController controller = PersistentTabController();
   final List<ScrollController> scrollController = [
     ScrollController(),
