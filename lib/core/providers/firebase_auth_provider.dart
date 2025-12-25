@@ -6,10 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final firebaseAuthProvider = Provider.autoDispose<FirebaseAuth>((ref) {
   throw UnimplementedError("Firebase: Provider not implement");
 });
-//firebase state
+/**
+ * firebase auth state
+ */
 final firebaseAuthStateProvider = FutureProvider.autoDispose((ref) async {
   final storage = ref.watch(storageProvider);
   final data = await storage.get("token");
-  print(data);
   return data;
 });

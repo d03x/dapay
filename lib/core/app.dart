@@ -1,6 +1,5 @@
 import 'package:dapay/core/providers/theme_provider.dart';
 import 'package:dapay/core/routers/router.dart';
-import 'package:dapay/core/widgets/widget.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +19,8 @@ class App extends ConsumerWidget {
       theme: FlexThemeData.light(scheme: FlexScheme.blueM3, appBarElevation: 0),
       debugShowCheckedModeBanner: false,
       themeMode: colorScheme.themeMode,
-      home: AuthWrapper(),
+      initialRoute: RouteName.root,
+      onGenerateRoute: RouterUtils.generateRoute,
     );
   }
 }

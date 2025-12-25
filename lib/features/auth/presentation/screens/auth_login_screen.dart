@@ -1,5 +1,8 @@
+import 'package:dapay/core/dialogs/info_dialog.dart';
+import 'package:dapay/core/routers/router.dart';
 import 'package:dapay/core/widgets/ui/widget_ui_input.dart';
 import 'package:dapay/features/auth/presentation/view_model/auth_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,9 +31,11 @@ class AuthLoginScreen extends ConsumerWidget {
     final controller = ref.watch(authLoginFormControllerProvider);
     ref.listen(authViewModel, (prevous, next) {
       if (next is AsyncError) {
-        final errorMessage = next.error.toString();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(backgroundColor: Colors.red, content: Text(errorMessage)),
+        InfoDialog.show(
+          context,
+          title: "Waduhhh!!",
+          message:
+              "Ada Kesalahan pada saat request! Tenang ini bukan salah client",
         );
       }
     });
@@ -58,15 +63,29 @@ class AuthLoginScreen extends ConsumerWidget {
                     width: 100.sw,
                     child: !isLoading
                         ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
+                            ),
                             onPressed: ref.read(authViewModel.notifier).login,
-                            child: Text("Login"),
+                            child: Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                            ),
                           )
-                        : CircularProgressIndicator.adaptive(),
+                        : CupertinoActivityIndicator(),
                   ),
                   SizedBox(
                     width: 100.sw,
                     child: ElevatedButton(
-                      onPressed: ref.read(authViewModel.notifier).login,
+                      onPressed: () {
+                        navigatorKey.currentState!.pushNamed(
+                          RouteName.register,
+                        );
+                      },
                       child: Text("Daftar Akun"),
                     ),
                   ),

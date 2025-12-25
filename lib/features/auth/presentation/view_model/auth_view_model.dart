@@ -1,4 +1,4 @@
-import 'package:dapay/core/local_storage/storage_service.dart';
+import 'package:dapay/features/auth/providers/auth_provider.dart';
 import 'package:dapay/features/auth/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +10,9 @@ class AuthViewModel extends AsyncNotifier {
     return;
   }
 
-  void _resetForm() {
-    final input = ref.watch(authLoginFormControllerProvider);
-    input.emailController.clear();
-    input.passwordController.clear();
-  }
-
   Future<void> login() async {
     final authRepository = ref.read(authRepositoryProvider);
-    final storageService = ref.read(storageProvider);
+    final auth = ref.read(authProvider.notifier);
     state = AsyncValue.loading();
     final input = ref.watch(authLoginFormControllerProvider);
     state = await AsyncValue.guard(() async {
@@ -27,9 +21,7 @@ class AuthViewModel extends AsyncNotifier {
           input.emailController.text.trim(),
           input.passwordController.text.trim(),
         );
-        //write token to storage
-        storageService.write('token', user.token);
-        storageService.write('refresh_token', user.refreshToken);
+        auth.updateState(user);
       } on FirebaseAuthException catch (e) {
         state = AsyncValue.error(e.toString(), StackTrace.current);
       }
@@ -38,13 +30,26 @@ class AuthViewModel extends AsyncNotifier {
 }
 
 class AuthLoginFormController {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  AuthLoginFormController({
+    required this.emailController,
+    required this.passwordController,
+  });
 }
 
 final authLoginFormControllerProvider =
     Provider.autoDispose<AuthLoginFormController>((ref) {
-      return AuthLoginFormController();
+      final passwordConroller = TextEditingController();
+      final passwordController = TextEditingController();
+      ref.onDispose(() {
+        passwordConroller.dispose();
+        passwordController.dispose();
+      });
+      return AuthLoginFormController(
+        emailController: passwordConroller,
+        passwordController: passwordController,
+      );
     });
 final authViewModel = AsyncNotifierProvider.autoDispose<AuthViewModel, dynamic>(
   () {
