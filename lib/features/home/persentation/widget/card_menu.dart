@@ -11,7 +11,7 @@ class CardMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       clipBehavior: .antiAlias,
-      elevation: 3,
+      elevation: 1,
       color: context.colors.surface,
       borderRadius: .all(.circular(10.r)),
       child: Column(
