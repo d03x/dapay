@@ -1,7 +1,4 @@
-import 'package:dapay/core/extensions/extension.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_lucide/flutter_lucide.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+part of "alert.dart";
 
 class NotifiedBanner extends StatelessWidget {
   const NotifiedBanner({super.key});

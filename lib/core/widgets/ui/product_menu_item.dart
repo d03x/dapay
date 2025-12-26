@@ -1,5 +1,6 @@
 import 'package:dapay/core/extensions/extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -28,22 +29,19 @@ class ProductMenuItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        // Material digunakan agar InkWell ripple effect berbentuk lingkaran
         Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: () {},
-            borderRadius: BorderRadius.circular(16.r), // Radius ripple
+            borderRadius: BorderRadius.circular(16.r),
             child: Container(
-              width: 50.w, // Sedikit diperbesar agar pas jempol
+              width: 50.w,
               height: 50.w,
               padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
-                // Menggunakan Squircle (Rounded Rectangle) yang lebih modern dari lingkaran penuh
                 borderRadius: BorderRadius.circular(18.r),
-                color: primaryColor.withValues(alpha: 0.1), // Background soft
+                color: primaryColor.withValues(alpha: 0.1),
               ),
-              // Jika icon belum ada, tampilkan Icon default
               child: SvgPicture.asset(
                 item.iconPath,
                 colorFilter: .mode(item.color ?? primaryColor, .srcIn),
@@ -57,7 +55,6 @@ class ProductMenuItem extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8.h),
-        // Text dengan penanganan 2 baris jika kepanjangan
         SizedBox(
           width: 60.w,
           child: Text(
@@ -68,12 +65,12 @@ class ProductMenuItem extends StatelessWidget {
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
               fontWeight: FontWeight.w800,
               fontSize: 9.sp,
-              height: 1.2, // Spasi antar baris teks
+              height: 1.2,
               color: Colors.black87,
             ),
           ),
         ),
       ],
-    );
+    ).animate().fade(duration: 500.ms).move(delay: 300.ms, duration: 600.ms);
   }
 }

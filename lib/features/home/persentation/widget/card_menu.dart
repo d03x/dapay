@@ -1,8 +1,8 @@
 import 'package:dapay/core/extensions/extension.dart';
+import 'package:dapay/core/widgets/ui/saldo/saldo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CardMenu extends StatelessWidget {
   const CardMenu({super.key});
@@ -20,58 +20,7 @@ class CardMenu extends StatelessWidget {
             child: Container(
               padding: .only(left: 10.w, right: 10.w, top: 10.h),
               width: 100.sw,
-              child: Row(
-                crossAxisAlignment: .center,
-                mainAxisAlignment: .start,
-                children: [
-                  Column(
-                    mainAxisAlignment: .start,
-                    crossAxisAlignment: .start,
-                    children: [
-                      Text(
-                        "Saldo DaPay Anda",
-                        style: context.textTheme.labelMedium!.copyWith(
-                          fontWeight: .w500,
-                          color: context.colors.onSurface.withValues(
-                            alpha: 0.7,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: .start,
-                        children: [
-                          Text(
-                            110_000.toIDR(),
-                            style: context.textTheme.titleMedium!.copyWith(
-                              fontWeight: .w800,
-                              fontSize: 18.sp,
-                              fontFamily: GoogleFonts.barlow().fontFamily,
-                              fontFeatures: [
-                                const FontFeature.tabularFigures(),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            "DP-827635293",
-                            style: context.textTheme.titleMedium!.copyWith(
-                              fontSize: 12.sp,
-                              fontFamily: GoogleFonts.barlow().fontFamily,
-                              fontFeatures: [
-                                const FontFeature.tabularFigures(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(LucideIcons.eye_off),
-                    color: context.colors.primary,
-                  ),
-                ],
-              ),
+              child: SaldoWidget(saldo: 5007234, rekening: "DP438746352"),
             ),
           ),
 

@@ -1,4 +1,5 @@
 import 'package:dapay/core/extensions/extension.dart';
+import 'package:dapay/core/widgets/br.dart';
 import 'package:dapay/core/widgets/ui/product_menu_item.dart';
 import 'package:dapay/features/home/persentation/widget/top_main_screen.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,6 @@ class HomeScreenContent extends ConsumerWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
     );
-    final primaryColor = context.colors.primary;
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -82,11 +82,7 @@ class HomeScreenContent extends ConsumerWidget {
                   children: [
                     TopMainScreen(),
                     SizedBox(height: 28.h),
-                    // Padding(
-                    //   padding: const EdgeInsets.all(8.0),
-                    //   child: NotifiedBanner(),
-                    // ),
-                    SizedBox(height: 10.h),
+                    Br(),
                     Padding(
                       padding: .symmetric(horizontal: 10.w),
                       child: RichText(
@@ -98,20 +94,17 @@ class HomeScreenContent extends ConsumerWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10.h),
+                    Br(value: 10.h),
                     GridView.builder(
-                      physics:
-                          const NeverScrollableScrollPhysics(), // Agar scroll mengikuti parent
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: menus.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount:
-                                4, // 4 Kolom (standar aplikasi PPOB)
+                            crossAxisCount: 4,
                             mainAxisSpacing: 0,
                             crossAxisSpacing: 8,
-                            childAspectRatio:
-                                0.85, // Mengatur rasio tinggi/lebar item
+                            childAspectRatio: 0.85,
                           ),
                       itemBuilder: (context, index) {
                         return ProductMenuItem(item: menus[index]);
@@ -120,7 +113,7 @@ class HomeScreenContent extends ConsumerWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10.h),
+              Br(),
               Container(
                 width: 100.sw,
                 color: context.colors.surface,

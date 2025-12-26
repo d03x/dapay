@@ -11,3 +11,9 @@ extension ConfigRefExtension on Ref {
     return watch(configProvider);
   }
 }
+
+extension WidgetExt on Widget {
+  SizedBox bR({double? size = 40}) {
+    return SizedBox(height: size, child: this);
+  }
+}
