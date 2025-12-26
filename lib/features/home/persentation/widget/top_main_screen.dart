@@ -1,0 +1,117 @@
+import 'package:custom_clippers/custom_clippers.dart';
+import 'package:dapay/core/extensions/extension.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_lucide/flutter_lucide.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class TopMainScreen extends StatelessWidget {
+  const TopMainScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final cardPosition = 70.h;
+    return Stack(
+      clipBehavior: .none,
+      children: [
+        Positioned(
+          child: ClipPath(
+            clipper: SinCosineWaveClipper(),
+            child: Container(
+              color: context.colors.primary,
+              width: 100.sw,
+              height: 180.h,
+            ),
+          ),
+        ),
+        Positioned(
+          left: 10.w,
+          right: 10.w,
+          child: SizedBox(
+            height: cardPosition,
+            child: Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Row(
+                  spacing: 10.w,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 35,
+                      width: 35,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        backgroundImage: NetworkImage(
+                          "https://i.pravatar.cc/150",
+                        ),
+                      ),
+                    ),
+
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment
+                          .center, // Teks di tengah secara vertikal
+                      crossAxisAlignment:
+                          CrossAxisAlignment.start, // Teks rata kiri
+                      children: [
+                        Text(
+                          "Selamat Pagi",
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: Colors.white70,
+                          ),
+                        ),
+                        Text(
+                          "Dadan Hidayat",
+                          maxLines: 1, // Batasi 1 baris
+                          overflow: TextOverflow
+                              .ellipsis, // Kalau nama panjang jadi "Dadan Hida..."
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+
+                Row(
+                  spacing: 0,
+                  children: [
+                    IconButton(
+                      iconSize: 19.h,
+                      color: context.colors.onPrimary,
+                      onPressed: () {},
+                      icon: Icon(LucideIcons.bell),
+                    ),
+                    IconButton(
+                      iconSize: 19.h,
+
+                      color: context.colors.onPrimary,
+                      onPressed: () {},
+                      icon: Icon(LucideIcons.message_circle),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: cardPosition,
+          child: SizedBox(
+            height: 130.h,
+            width: MediaQuery.of(context).size.width,
+            child: Padding(
+              padding: .only(left: 10.w, right: 10.w),
+              child: Material(
+                elevation: 3,
+                color: Colors.white,
+                borderRadius: .all(.circular(10.r)),
+                child: Text("WKWKW"),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
