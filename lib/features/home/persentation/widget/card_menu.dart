@@ -18,7 +18,6 @@ class CardMenu extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              color: context.colors.primary.withValues(alpha: 0.07),
               padding: .only(left: 10.w, right: 10.w, top: 10.h),
               width: 100.sw,
               child: Row(
@@ -38,14 +37,31 @@ class CardMenu extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text(
-                        110_000.toIDR(),
-                        style: context.textTheme.titleMedium!.copyWith(
-                          fontWeight: .w800,
-                          fontSize: 18.sp,
-                          fontFamily: GoogleFonts.plusJakartaSans().fontFamily,
-                          fontFeatures: [const FontFeature.tabularFigures()],
-                        ),
+                      Column(
+                        crossAxisAlignment: .start,
+                        children: [
+                          Text(
+                            110_000.toIDR(),
+                            style: context.textTheme.titleMedium!.copyWith(
+                              fontWeight: .w800,
+                              fontSize: 18.sp,
+                              fontFamily: GoogleFonts.barlow().fontFamily,
+                              fontFeatures: [
+                                const FontFeature.tabularFigures(),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            "DP-827635293",
+                            style: context.textTheme.titleMedium!.copyWith(
+                              fontSize: 12.sp,
+                              fontFamily: GoogleFonts.barlow().fontFamily,
+                              fontFeatures: [
+                                const FontFeature.tabularFigures(),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -58,13 +74,7 @@ class CardMenu extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            width: 100.sw,
-            height: 1.h,
-            child: ColoredBox(
-              color: context.colors.inverseSurface.withValues(alpha: 0.1),
-            ),
-          ),
+
           Expanded(
             child: Padding(
               padding: .only(left: 10.w, right: 10.w),

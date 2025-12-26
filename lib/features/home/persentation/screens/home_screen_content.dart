@@ -1,6 +1,5 @@
 import 'package:dapay/core/extensions/extension.dart';
 import 'package:dapay/core/widgets/ui/product_menu_item.dart';
-import 'package:dapay/features/home/persentation/widget/notified_banner.dart';
 import 'package:dapay/features/home/persentation/widget/top_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -83,17 +82,17 @@ class HomeScreenContent extends ConsumerWidget {
                   children: [
                     TopMainScreen(),
                     SizedBox(height: 28.h),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: NotifiedBanner(),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: NotifiedBanner(),
+                    // ),
                     SizedBox(height: 10.h),
                     Padding(
                       padding: .symmetric(horizontal: 10.w),
                       child: RichText(
                         text: TextSpan(
                           text: "Produk Utama",
-                          style: context.textTheme.titleMedium!.copyWith(
+                          style: context.textTheme.titleSmall!.copyWith(
                             fontWeight: .w600,
                           ),
                         ),

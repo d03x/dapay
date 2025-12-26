@@ -112,7 +112,7 @@ class TopMainScreen extends StatelessWidget {
         Positioned(
           top: cardPosition,
           child: SizedBox(
-            height: 130.h,
+            height: 131.h,
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: .only(left: 10.w, right: 10.w),
