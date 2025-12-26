@@ -17,17 +17,30 @@ class TopMainScreen extends StatelessWidget {
           child: ClipPath(
             clipper: SinCosineWaveClipper(),
             child: Container(
-              color: context.colors.primary,
               width: 100.sw,
               height: 180.h,
+              decoration: BoxDecoration(
+                color: context.colors.surface,
+                image: DecorationImage(
+                  image: NetworkImage(
+                    'https://static.vecteezy.com/system/resources/previews/006/960/486/large_2x/ramadan-mubarak-islamic-arabic-green-luxury-background-with-geometric-pattern-and-beautiful-ornament-vector.jpg',
+                  ),
+                  fit: BoxFit.cover, // Memenuhi seluruh area container
+                  // colorFilter opsional: untuk membuat gambar menyatu dengan warna primary
+                  colorFilter: ColorFilter.mode(
+                    context.colors.primary.withValues(alpha: 0.9),
+                    BlendMode.srcATop,
+                  ),
+                ),
+              ),
             ),
           ),
         ),
         Positioned(
           left: 10.w,
+          top: 10.h,
           right: 10.w,
           child: SizedBox(
-            height: cardPosition,
             child: Row(
               mainAxisAlignment: .spaceBetween,
               children: [
@@ -104,7 +117,7 @@ class TopMainScreen extends StatelessWidget {
               padding: .only(left: 10.w, right: 10.w),
               child: Material(
                 elevation: 3,
-                color: Colors.white,
+                color: context.colors.surface,
                 borderRadius: .all(.circular(10.r)),
                 child: Text("WKWKW"),
               ),
