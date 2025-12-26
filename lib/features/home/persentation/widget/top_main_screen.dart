@@ -1,5 +1,6 @@
 import 'package:custom_clippers/custom_clippers.dart';
 import 'package:dapay/core/extensions/extension.dart';
+import 'package:dapay/features/home/persentation/widget/card_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,7 +39,7 @@ class TopMainScreen extends StatelessWidget {
         ),
         Positioned(
           left: 10.w,
-          top: 10.h,
+          top: 13.h,
           right: 10.w,
           child: SizedBox(
             child: Row(
@@ -115,12 +116,7 @@ class TopMainScreen extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: .only(left: 10.w, right: 10.w),
-              child: Material(
-                elevation: 3,
-                color: context.colors.surface,
-                borderRadius: .all(.circular(10.r)),
-                child: Text("WKWKW"),
-              ),
+              child: CardMenu(),
             ),
           ),
         ),

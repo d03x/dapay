@@ -1,6 +1,7 @@
 import 'package:dapay/core/providers/theme_provider.dart';
 import 'package:dapay/core/routers/router.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,15 +14,16 @@ class App extends ConsumerWidget {
     final colorScheme = ref.watch(themeProvider);
     return MaterialApp(
       darkTheme: FlexThemeData.dark(
-        scheme: FlexScheme.blueM3,
+        scheme: FlexScheme.bigStone,
         fontFamily: GoogleFonts.plusJakartaSans().fontFamily,
         appBarElevation: 0,
       ),
       navigatorKey: navigatorKey,
       theme: FlexThemeData.light(
-        scheme: FlexScheme.blueM3,
+        scheme: FlexScheme.brandBlue,
         fontFamily: GoogleFonts.plusJakartaSans().fontFamily,
         appBarElevation: 4,
+        scaffoldBackground: CupertinoColors.lightBackgroundGray,
         appBarStyle: FlexAppBarStyle.primary,
       ),
       debugShowCheckedModeBanner: false,

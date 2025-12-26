@@ -5,6 +5,7 @@ import 'package:dapay/features/auth/presentation/screens/auth_login_screen.dart'
 import 'package:dapay/features/auth/presentation/screens/auth_register_screen.dart';
 import 'package:dapay/features/home/persentation/screens/home_screen_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_lucide/flutter_lucide.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,9 +29,13 @@ class MainScreen extends ConsumerWidget {
     return [
       PersistentBottomNavBarItem(
         iconSize: 25.w,
-        icon: const Icon(
-          LucideIcons.house,
+        icon: Icon(LucideIcons.house).animate().scale(
+          duration: 300.ms,
+          begin: const Offset(0.8, 0.8),
+          end: const Offset(1, 1),
+          curve: Curves.easeOutBack,
         ), // Gunakan rounded icon biar lebih modern
+
         title: ("Home"),
         activeColorPrimary: colors.primary,
         inactiveColorPrimary: colors.onPrimaryContainer.withValues(
