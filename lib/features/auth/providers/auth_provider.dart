@@ -21,7 +21,7 @@ class AuthState extends Equatable {
 }
 
 class AuthProvider extends AsyncNotifier<AuthState> {
-  final String _tokenKey = "token_auth";
+  final String _tokenKey = "access_token_";
   final String _refreshTokenKey = "refresh_token";
   @override
   Future<AuthState> build() async {

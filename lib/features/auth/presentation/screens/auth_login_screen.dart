@@ -1,4 +1,3 @@
-import 'package:dapay/core/dialogs/info_dialog.dart';
 import 'package:dapay/core/extensions/extension.dart';
 import 'package:dapay/core/routers/router.dart';
 import 'package:dapay/core/widgets/ui/widget_ui_input.dart';
@@ -32,12 +31,9 @@ class AuthLoginScreen extends ConsumerWidget {
     final controller = ref.watch(authLoginFormControllerProvider);
     ref.listen(authViewModel, (prevous, next) {
       if (next is AsyncError) {
-        InfoDialog.show(
+        ScaffoldMessenger.of(
           context,
-          title: "Waduhhh!!",
-          message:
-              "Ada Kesalahan pada saat request! Tenang ini bukan salah client ${next.error.toString()}",
-        );
+        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
       }
     });
     return Scaffold(

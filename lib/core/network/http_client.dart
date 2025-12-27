@@ -6,6 +6,7 @@ final httpClient = Provider.autoDispose((ref) {
   final dio = Dio(
     BaseOptions(
       baseUrl: ref.config.apiUrl,
+      contentType: Headers.jsonContentType,
       connectTimeout: Duration(milliseconds: ref.config.apiTimeout),
       receiveTimeout: Duration(milliseconds: ref.config.apiTimeout),
     ),

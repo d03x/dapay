@@ -1,6 +1,6 @@
 import 'package:dapay/features/auth/providers/auth_provider.dart';
 import 'package:dapay/features/auth/repository/auth_repository.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,16 +16,32 @@ class AuthViewModel extends AsyncNotifier {
     state = AsyncValue.loading();
     final input = ref.watch(authLoginFormControllerProvider);
     state = await AsyncValue.guard(() async {
-      try {
-        final user = await authRepository.login(
-          input.emailController.text.trim(),
-          input.passwordController.text.trim(),
-        );
-        auth.updateState(user);
-      } on FirebaseAuthException catch (e) {
-        state = AsyncValue.error(e.toString(), StackTrace.current);
-      }
+      final user = await authRepository.login(
+        input.emailController.text.trim(),
+        input.passwordController.text.trim(),
+      );
+      auth.updateState(user);
     });
+    Map<String, dynamic> message = {};
+    if (state.hasError) {
+      final error = state.error;
+      if (error is DioException) {
+        final data = error.response?.data;
+        if (data != null && data is Map) {
+          data.forEach((key, value) {
+            if (value is List && value.isNotEmpty) {
+              message[key] = value;
+            } else {
+              message[key] = value.toString();
+            }
+          });
+        }
+        if (message.isEmpty) {
+          message['general'] = 'Opps ada kesalahan';
+        }
+        state = AsyncValue.error(message, error.stackTrace);
+      }
+    }
   }
 }
 

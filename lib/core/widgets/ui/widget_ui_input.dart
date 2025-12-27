@@ -7,9 +7,11 @@ class WidgetUiInput extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   final TextInputType type;
+  final String? errorText;
 
   const WidgetUiInput({
     super.key,
+    this.errorText,
     required this.label,
     this.controller,
     this.type = TextInputType.text,
@@ -24,6 +26,7 @@ class WidgetUiInput extends StatelessWidget {
       children: [
         SizedBox(
           child: TextFormField(
+            forceErrorText: errorText,
             controller: controller,
             keyboardType: type,
             obscureText: obscureText,
