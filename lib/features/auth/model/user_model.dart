@@ -5,13 +5,9 @@ class UserModel extends Equatable {
   final String name;
   final bool? isActivated;
   final String email;
-  final String token;
-  final String refreshToken;
   const UserModel({
     this.isActivated,
     required this.email,
-    required this.token,
-    required this.refreshToken,
     required this.id,
     required this.name,
   });
@@ -19,8 +15,6 @@ class UserModel extends Equatable {
     return UserModel(
       isActivated: data['isActivated'] ?? false,
       email: data['email'],
-      token: data['token'],
-      refreshToken: data['refresh_token'],
       id: data['id'],
       name: data['name'],
     );
@@ -31,11 +25,9 @@ class UserModel extends Equatable {
       'is_activated': isActivated,
       'name': name,
       'email': email,
-      'token': token,
-      'refresh_token': refreshToken,
     };
   }
 
   @override
-  List<Object> get props => ['id', 'token', 'refreshToken'];
+  List<Object> get props => [id, name];
 }

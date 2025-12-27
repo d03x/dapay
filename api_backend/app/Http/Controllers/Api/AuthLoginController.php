@@ -18,7 +18,10 @@ class AuthLoginController extends Controller
             'password' => ["required"]
         ]);
         if ($user->fails()) {
-            return response()->json($user->errors(), HttpFoundationResponse::HTTP_BAD_REQUEST);
+            return response()->json([
+                'message' => "Error",
+                'errors' => $user->errors(),
+            ], HttpFoundationResponse::HTTP_UNPROCESSABLE_ENTITY);
         }
         if (!$token = Auth::attempt($user->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);

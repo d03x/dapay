@@ -11,36 +11,42 @@ class AuthViewModel extends AsyncNotifier {
   }
 
   Future<void> login() async {
+    Map<String, dynamic> cleanErrors = {};
+
     final authRepository = ref.read(authRepositoryProvider);
     final auth = ref.read(authProvider.notifier);
     state = AsyncValue.loading();
     final input = ref.watch(authLoginFormControllerProvider);
-    state = await AsyncValue.guard(() async {
+    try {
       final user = await authRepository.login(
         input.emailController.text.trim(),
         input.passwordController.text.trim(),
       );
       auth.updateState(user);
-    });
-    Map<String, dynamic> message = {};
-    if (state.hasError) {
-      final error = state.error;
-      if (error is DioException) {
-        final data = error.response?.data;
-        if (data != null && data is Map) {
-          data.forEach((key, value) {
-            if (value is List && value.isNotEmpty) {
-              message[key] = value;
-            } else {
-              message[key] = value.toString();
-            }
+      state = const AsyncValue.data(null);
+    } on DioException catch (e) {
+      if (e.response != null) {
+        if (e.response?.statusCode == 422) {
+          final Map<String, dynamic> errorData = e.response?.data;
+          final Map<String, dynamic> validationErrors = errorData['errors'];
+          validationErrors.forEach((key, value) {
+            cleanErrors[key] = value;
           });
+        } else if (e.response?.statusCode == 401) {
+          cleanErrors['authentication'] = "Akun tidak ditemukan";
+        } else {
+          cleanErrors['global'] = "Ada kesalahan";
         }
-        if (message.isEmpty) {
-          message['general'] = 'Opps ada kesalahan';
-        }
-        state = AsyncValue.error(message, error.stackTrace);
+      } else {
+        cleanErrors['global'] = "Ada kesalahan";
       }
+      if (cleanErrors.isEmpty) {
+        cleanErrors['global'] = "Ada kesalahan";
+      }
+      state = AsyncValue.error(cleanErrors, e.stackTrace);
+    } catch (e) {
+      cleanErrors['authentication'] = e.toString();
+      state = AsyncValue.error(cleanErrors, StackTrace.current);
     }
   }
 }

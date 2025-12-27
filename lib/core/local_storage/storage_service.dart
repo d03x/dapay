@@ -4,7 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class StorageService {
   final _storage = const FlutterSecureStorage(aOptions: AndroidOptions());
 
-  Future<void> write(String key, String value) async {
+  Future<void> write(String key, String? value) async {
     await _storage.write(key: key, value: value);
   }
 

@@ -29,14 +29,28 @@ class AuthLoginScreen extends ConsumerWidget {
     final authState = ref.watch(authViewModel);
     final isLoading = authState.isLoading;
     final controller = ref.watch(authLoginFormControllerProvider);
-    ref.listen(authViewModel, (prevous, next) {
-      if (next is AsyncError) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(next.error.toString())));
+    String? getError(String key) {
+      if (authState.hasError) {
+        if (authState.error is Map<String, dynamic>) {
+          final Map<String, dynamic> error =
+              authState.error as Map<String, dynamic>;
+          if (error.containsKey(key)) {
+            if (error[key] is String) {
+              return error[key];
+            }
+            final errorValue = error[key] as List<dynamic>;
+            if (errorValue.isNotEmpty) {
+              return errorValue[0];
+            }
+          }
+        }
       }
-    });
+      return null;
+    }
+
+    final authError = getError('authentication');
     return Scaffold(
+      backgroundColor: context.colors.surface,
       body: SafeArea(
         child: Padding(
           padding: .directional(top: 20.h, bottom: 0, end: 10.w, start: 10.w),
@@ -46,13 +60,18 @@ class AuthLoginScreen extends ConsumerWidget {
               Column(
                 spacing: 10.h,
                 children: [
+                  authError != null
+                      ? Text(getError('authentication').toString())
+                      : Text(""),
                   WidgetUiInput(
+                    errorText: getError("email"),
                     label: "Email",
                     type: .emailAddress,
                     controller: controller.emailController,
                   ),
                   WidgetUiInput(
                     obscureText: true,
+                    errorText: getError("password"),
                     label: "Passsword",
                     controller: controller.passwordController,
                   ),

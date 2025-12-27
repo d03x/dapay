@@ -1,6 +1,7 @@
 import 'package:dapay/core/extensions/extension.dart';
 import 'package:dapay/core/widgets/br.dart';
 import 'package:dapay/core/widgets/ui/product_menu_item.dart';
+import 'package:dapay/features/auth/providers/auth_provider.dart';
 import 'package:dapay/features/home/persentation/widget/top_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,6 +68,7 @@ class HomeScreenContent extends ConsumerWidget {
         statusBarIconBrightness: Brightness.dark,
       ),
     );
+    final state = ref.watch(authProvider);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

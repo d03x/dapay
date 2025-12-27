@@ -1,5 +1,5 @@
 import 'package:dapay/core/local_storage/storage_service.dart';
-import 'package:dapay/features/auth/model/user_model.dart';
+import 'package:dapay/features/auth/model/jwt_auth_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +32,7 @@ class AuthProvider extends AsyncNotifier<AuthState> {
   }
 
   //////// FUNGSI
-  Future<void> updateState(UserModel user) async {
+  Future<void> updateState(JwtAuthModel user) async {
     final storageService = ref.read(storageProvider);
     state = const AsyncValue.loading();
     storageService.write(_tokenKey, user.token);

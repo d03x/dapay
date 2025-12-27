@@ -1,18 +1,17 @@
 import 'package:dapay/core/network/http_client.dart';
-import 'package:dapay/features/auth/model/user_model.dart';
+import 'package:dapay/features/auth/model/jwt_auth_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthRepository {
   final Dio dio;
-
   AuthRepository({required this.dio});
-  Future<UserModel> login(String email, String password) async {
+  Future<JwtAuthModel> login(String email, String password) async {
     final data = await dio.post(
       "/auth/login",
       data: {"email": email, "password": password},
     );
-    return UserModel.fromJson(data.data);
+    return JwtAuthModel.fromJson(data.data);
   }
 }
 
